@@ -15,7 +15,7 @@
   "type": "module",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "server": "nodemon ./src/server.js"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
@@ -23,8 +23,10 @@
     "cors": "^2.8.6",
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
+    "google-auth-library": "^10.6.2",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.3.1",
+    "nodemailer": "^8.0.3",
     "nodemon": "^3.1.14",
     "prettier": "^3.8.1"
   }

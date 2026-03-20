@@ -1,3 +1,10 @@
+import { asyncHandler } from "../middleware/asyncHandler.js";
+import dotenv from "dotenv";
+import jwt from "jsonwebtoken";
+import { User } from "../models/auth.model.js";
+
+dotenv.config();
+
 const verifyJWT = asyncHandler(async (req, res, next) => {
   try {
     const token =
@@ -23,4 +30,4 @@ const verifyJWT = asyncHandler(async (req, res, next) => {
   }
 });
 
-export {verifyJWT}
+export { verifyJWT };
