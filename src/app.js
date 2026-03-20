@@ -2,6 +2,7 @@ import express, { urlencoded } from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import dotenv from "dotenv";
+import {errorHandler} from '../src/middleware/errors.middleware.js'
 
 dotenv.config();
 
@@ -26,4 +27,9 @@ app.use(
   })
 );
 
+// routes middleware
+import { authRouter } from "../src/routes/auth.routes.js";
+app.use("/api/v1/auth", authRouter);
+
+app.use(errorHandler)
 export { app };
