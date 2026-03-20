@@ -5,6 +5,10 @@ import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 import { User } from "../models/auth.model.js";
 import crypto from "crypto";
+import { resetPasswordTemplate } from "../templates/resetPassword.js";
+import { verifyEmailTemplate } from "../templates/verifyEmail.js";
+import { sendEmail } from "../utils/sendEmail.js";
+import { client } from "../utils/googleClient.js";
 
 dotenv.config();
 
