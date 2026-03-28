@@ -30,7 +30,7 @@ const authRouter = Router();
 
 /**
  * @swagger
- * /auth/register:
+ * /api/v1/auth/register:
  *   post:
  *     summary: Register a new user
  *     tags: [Auth]
@@ -69,7 +69,7 @@ authRouter
   );
 /**
  * @swagger
- * /auth/login:
+ * /api/v1/auth/login:
  *   post:
  *     summary: Login user
  *     tags: [Auth]
@@ -105,7 +105,7 @@ authRouter
   );
 /**
  * @swagger
- * /auth/logout:
+ * /api/v1/auth/logout:
  *   post:
  *     summary: Logout user
  *     tags: [Auth]
@@ -122,7 +122,7 @@ authRouter.route("/refresh-token").post(refreshToken);
 authRouter.route("/google").post(googleLogin);
 /**
  * @swagger
- * /auth/reset-password:
+ * /api/v1/auth/reset-password:
  *   post:
  *     summary: Reset user password
  *     tags: [Auth]
@@ -133,6 +133,16 @@ authRouter.route("/google").post(googleLogin);
 authRouter
   .route("/reset-password")
   .post(validate(resetPasswordSchema), resetPassword);
+  /**
+ * @swagger
+ * /api/v1/auth/forgot-password:
+ *   post:
+ *     summary: forgot user password
+ *     tags: [Auth]
+ *     responses:
+ *       200:
+ *         description: OTP sent to email
+ */
 authRouter
   .route("/forgot-password")
   .post(
@@ -142,7 +152,7 @@ authRouter
   );
 /**
  * @swagger
- * /auth/verify-email/{token}:
+ * /api/v1/auth/verify-email/{token}:
  *   get:
  *     summary: Verify user email
  *     tags: [Auth]
