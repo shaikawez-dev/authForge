@@ -41,19 +41,23 @@ const authRouter = Router();
  *           schema:
  *             type: object
  *             required:
- *               - name
+ *               - fullName
  *               - email
  *               - password
+ *               - username
  *             properties:
- *               name:
+ *               fullName:
  *                 type: string
- *                 example: Awez
+ *                 example:Shaik Awez
  *               email:
  *                 type: string
  *                 example: awez@example.com
  *               password:
  *                 type: string
  *                 example: password123
+ *               username:
+ *                 type: string
+ *                 example: awez
  *     responses:
  *       201:
  *         description: User registered successfully
@@ -126,6 +130,26 @@ authRouter.route("/google").post(googleLogin);
  *   post:
  *     summary: Reset user password
  *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *               - otp
+ *               - newPassword
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 example: awez@example.com
+ *               password:
+ *                 type: string
+ *                 example: password123
+ *               otp:
+ *                 type: string
+ *                 example: 123456
  *     responses:
  *       200:
  *         description: Password reset successful
@@ -133,12 +157,24 @@ authRouter.route("/google").post(googleLogin);
 authRouter
   .route("/reset-password")
   .post(validate(resetPasswordSchema), resetPassword);
-  /**
+/**
  * @swagger
  * /api/v1/auth/forgot-password:
  *   post:
  *     summary: forgot user password
  *     tags: [Auth]
+ * requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 example: awez@example.com
  *     responses:
  *       200:
  *         description: OTP sent to email

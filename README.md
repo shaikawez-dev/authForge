@@ -1,89 +1,128 @@
 # AuthForge 🔐
 
-A production-ready authentication and authorization backend built with Node.js, Express, MongoDB, and Redis. Designed with scalability, security, and real-world architecture in mind.
+A **production-ready authentication and authorization backend** built with Node.js, Express, MongoDB, and Redis.
+Designed with **scalability, security, and real-world backend architecture** in mind.
+
+🌍 **Live API:** https://authforge-vkjh.onrender.com
+📘 **API Docs (Swagger):** https://authforge-vkjh.onrender.com/api-docs
 
 ---
 
 ## 🚀 Features
 
-* JWT Authentication (Access + Refresh Tokens)
+### 🔐 Authentication & Security
+
+* JWT Authentication (**Access + Refresh Tokens**)
 * Refresh Token Rotation
-* Role-Based Access Control (RBAC)
-* Email Verification via Token
-* Password Reset using OTP
+* Secure HTTP-only Cookie-based Auth
+* Password Hashing (bcrypt)
+
+### 👤 User Management
+
+* User Registration & Login
+* Email Verification (Token-based)
+* Password Reset via OTP
 * Google OAuth Login
-* Redis-based Rate Limiting & OTP Storage
-* Secure HTTP-only Cookies
-* Zod Input Validation
-* Controller-Service Architecture
-* Dockerized Setup
+
+### 🛡️ Authorization
+
+* Role-Based Access Control (**RBAC**)
+* Protected Routes Middleware
+
+### ⚡ Performance & Protection
+
+* Redis-based OTP Storage
+* Redis-based Rate Limiting (Brute-force protection)
+* Input Validation using Zod
+* Helmet & Secure Headers
+
+### 🧱 Architecture
+
+* Controller-Service Pattern
+* Centralized Error Handling
+* Token Service Abstraction
+* Scalable Folder Structure
 
 ---
 
 ## 🛠 Tech Stack
 
-* Node.js, Express.js
-* MongoDB (Mongoose)
-* Redis
-* JWT (Authentication)
-* Zod (Validation)
-* Docker
+| Category   | Tech                |
+| ---------- | ------------------- |
+| Backend    | Node.js, Express.js |
+| Database   | MongoDB (Mongoose)  |
+| Caching    | Redis               |
+| Auth       | JWT                 |
+| Validation | Zod                 |
+| DevOps     | Docker              |
+| API Docs   | Swagger             |
 
 ---
 
-## 🧱 Architecture
+## 🧱 Project Structure
 
-* Controller-Service Pattern
-* Middleware-based Authentication
-* Token Service Abstraction
-* Redis for caching, OTP, and rate limiting
+```bash
+src/
+├── controllers/     # Request/Response handling
+├── services/        # Business logic
+├── models/          # Mongoose schemas
+├── middlewares/     # Auth, error handling, validation
+├── routes/          # API routes
+├── utils/           # Helpers (email, tokens, etc.)
+├── validators/      # Zod schemas
+└── config/          # DB, Redis, Swagger configs
+```
 
 ---
 
-## 📡 API Endpoints
+## 📡 API Overview
 
-| Method | Endpoint                         | Description    |
-| ------ | -------------------------------- | -------------- |
-| POST   | /api/v1/auth/register            | Register user  |
-| POST   | /api/v1/auth/login               | Login          |
-| POST   | /api/v1/auth/logout              | Logout         |
-| POST   | /api/v1/auth/refresh             | Refresh token  |
-| POST   | /api/v1/auth/forgot-password     | Send OTP       |
-| POST   | /api/v1/auth/reset-password      | Reset password |
-| GET    | /api/v1/auth/verify-email/:token | Verify email   |
+| Method | Endpoint                         | Description          |
+| ------ | -------------------------------- | -------------------- |
+| POST   | /api/v1/auth/register            | Register new user    |
+| POST   | /api/v1/auth/login               | Login user           |
+| POST   | /api/v1/auth/logout              | Logout user          |
+| POST   | /api/v1/auth/refresh-token             | Refresh access token |
+| POST   | /api/v1/auth/forgot-password     | Send OTP             |
+| POST   | /api/v1/auth/reset-password      | Reset password       |
+| GET    | /api/v1/auth/verify-email/:token | Verify email         |
+| POST   | /api/v1/auth/google-login        | Google OAuth login   |
+
+👉 Full API documentation available at Swagger UI.
 
 ---
 
 ## 📘 API Documentation
 
-Swagger UI available at:
-http://localhost:5000/api-docs
+Interactive API docs powered by Swagger:
+
+🔗 https://authforge-vkjh.onrender.com/api-docs
 
 ---
 
-## ⚙️ Setup Instructions
+## ⚙️ Environment Variables
 
-```bash
-git clone https://github.com/your-username/authforge.git
-cd authforge
-npm install
-```
-
-Create a `.env` file:
+Create a `.env` file in root:
 
 ```env
 PORT=5000
-MONGO_URI=
-JWT_SECRET=
-REFRESH_TOKEN_SECRET=
-REDIS_URL=
-GOOGLE_CLIENT_ID=
-BASE_URL=http://localhost:5000
+MONGO_URI=your_mongodb_uri
+JWT_SECRET=your_jwt_secret
+REFRESH_TOKEN_SECRET=your_refresh_secret
+REDIS_URL=your_redis_url
+GOOGLE_CLIENT_ID=your_google_client_id
+BASE_URL=https://authforge-vkjh.onrender.com
 ```
 
-Run the app:
+---
+
+## 🧪 Local Setup
 
 ```bash
+git clone https://github.com/shaikawez-dev/authforge.git
+cd authforge
+
+npm install
 npm run dev
 ```
 
@@ -97,28 +136,42 @@ docker-compose up --build
 
 ---
 
-## 🌍 Deployment
+## 🔐 Security Practices Implemented
 
-Backend deployed at:
-https://your-domain.com
+* HTTP-only cookies (XSS protection)
+* Token hashing (email verification & OTP)
+* Rate limiting on sensitive routes
+* Input validation (Zod)
+* Secure headers via Helmet
+* Refresh token validation & rotation
 
 ---
 
-## 📬 Postman Collection
+## ⚡ Key Highlights
 
-Available in:
-docs/postman_collection.json
+* Designed for **real-world scalability**
+* Clean separation of concerns (Controller → Service)
+* Redis integration for performance & security
+* Production-grade authentication flow
 
 ---
 
 ## 📌 Future Improvements
 
 * Multi-device session management
-* Token blacklisting using Redis
-* Monitoring & logging (Winston + Morgan)
+* Token blacklisting (Redis)
+* Logging system (Winston)
+* Monitoring (Prometheus/Grafana)
+* CI/CD pipeline
 
 ---
 
 ## 👨‍💻 Author
 
-Shaik Awez
+**Shaik Awez**
+
+---
+
+## ⭐ Show your support
+
+If you like this project, consider giving it a ⭐ on GitHub!
