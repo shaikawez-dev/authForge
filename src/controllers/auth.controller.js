@@ -61,7 +61,8 @@ const register = asyncHandler(async (req, res) => {
   if (!createdUser) {
     throw new ApiError(500, "Something went wrong while registering the user");
   }
-  const verificationUrl = `http://localhost:5000/api/v1/auth/verify-email/${token}`;
+  const baseUrl = `${req.protocol}://${req.get("host")}`;
+  const verificationUrl = `${baseUrl}/api/v1/auth/verify-email/${token}`;
   const html = verifyEmailTemplate(createdUser.fullName, verificationUrl);
   await sendEmail(createdUser.email, "Verify your Email", html);
 
@@ -199,7 +200,6 @@ const forgotPassword = asyncHandler(async (req, res) => {
 });
 
 const resetPassword = asyncHandler(async (req, res) => {
-
   const { email, otp, newPassword } = req.body;
 
   const validOTP = await verifyOTP(email, otp);
